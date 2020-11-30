@@ -11,6 +11,7 @@
 #include <chrono>
 
 
+
 using namespace cv;
 using namespace std;
 
@@ -57,31 +58,32 @@ int main() {
 			string readPath = paths2[number];
 			Mat ori = imread(readPath);
 			Mat tmp;
-			string imagePath = paths[9 * i + 1]+"\\"+to_string(j)+".jpg"; // gaussian
+			string imageNumber = (j<10)? "0"+to_string(j):to_string(j);
+			string imagePath = paths[9 * i + 1]+"\\"+ imageNumber +".jpg"; // gaussian
 			tmp = addGaussian(ori, 3);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 3] + "\\" + to_string(j) + ".jpg"; // motionB
+			imagePath = paths[9 * i + 3] + "\\" + imageNumber + ".jpg"; // motionB
 			tmp = motionBlurs(ori);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 8] + "\\" + to_string(j) + ".jpg"; // scale-up
+			imagePath = paths[9 * i + 8] + "\\" + imageNumber + ".jpg"; // scale-up
 			tmp = RandomResize(ori, 0);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 7] + "\\" + to_string(j) + ".jpg"; // scale-down
+			imagePath = paths[9 * i + 7] + "\\" + imageNumber + ".jpg"; // scale-down
 			tmp = RandomResize(ori, 1);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 2] + "\\" + to_string(j) + ".jpg"; // left-crop
+			imagePath = paths[9 * i + 2] + "\\" + imageNumber + ".jpg"; // left-crop
 			tmp = RandomCrop(ori, 0);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 4] + "\\" + to_string(j) + ".jpg"; // right-crop
+			imagePath = paths[9 * i + 4] + "\\" + imageNumber + ".jpg"; // right-crop
 			tmp = RandomCrop(ori, 1);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 5] + "\\" + to_string(j) + ".jpg"; // rotation
+			imagePath = paths[9 * i + 5] + "\\" + imageNumber + ".jpg"; // rotation
 			tmp = RandomRotate(ori);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 6] + "\\" + to_string(j) + ".jpg"; // salt&peper
-			tmp = addSaltPeper(ori, 1000);
+			imagePath = paths[9 * i + 6] + "\\" + imageNumber + ".jpg"; // salt&peper
+			tmp = addSaltPeper(ori, 3500);
 			imwrite(imagePath, tmp);
-			imagePath = paths[9 * i + 0] + "\\" + to_string(j) + ".jpg"; // distort
+			imagePath = paths[9 * i + 0] + "\\" + imageNumber + ".jpg"; // distort
 			tmp = Distort(ori);
 			imwrite(imagePath, tmp);
 
